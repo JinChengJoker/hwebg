@@ -1,14 +1,22 @@
 {
   "name": "hwebg",
   "version": "0.1.0",
-  "description": "",
-  "main": "index.js",
+  "description": "根据 swagger 文件生成 CURD 页面",
+  "main": "dist/index.js",
+  "bin": {
+    "hwebg": "dist/index.js"
+  },
+  "files": [
+    "/dist",
+    "/template"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "Jin Cheng",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/node": "^17.0.32",
     "ts-node": "^10.7.0",

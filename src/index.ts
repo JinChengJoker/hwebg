@@ -1,10 +1,12 @@
+#!/usr/bin/env node
+
 import * as fs from 'fs';
 import * as path from 'path';
-import type { OpenApi, Service, tableProperties } from './typing'
+import type { OpenApi, Service, tableProperties } from '../typing'
 
 const processPath = process.cwd()
 const openApiFilePath = path.join(processPath, '/config/openapi.ts')
-const templateFilePath = path.join(__dirname, 'template.tsx')
+const templateFilePath = path.join(__dirname, '../template/page')
 const templateString = readFileString(templateFilePath)
 
 if (fs.existsSync(openApiFilePath)) {
