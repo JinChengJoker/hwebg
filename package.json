@@ -1,7 +1,14 @@
 {
   "name": "hwebg",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "根据 swagger 文件生成 CURD 页面",
+  "repository": {
+    "type": "git",
+    "url": "git+git@github.com:JinChengJoker/hwebg.git"
+  },
+  "keywords": [],
+  "author": "Jin Cheng",
+  "license": "MIT",
   "main": "dist/index.js",
   "files": [
     "/dist",
@@ -11,9 +18,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc"
   },
-  "keywords": [],
-  "author": "Jin Cheng",
-  "license": "MIT",
   "devDependencies": {
     "@types/node": "^17.0.32",
     "ts-node": "^10.7.0",
