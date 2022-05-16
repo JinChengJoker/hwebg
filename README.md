@@ -8,7 +8,7 @@
 ### 安装依赖
 
 ```bash
-$ yarn install
+$ tyarn install
 ```
 
 ### 运行
