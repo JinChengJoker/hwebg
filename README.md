@@ -1,4 +1,25 @@
 ## 说明
 
-1. 需要搭配`@umi-plugin/openapi`使用。
-2. 需要搭配公司内部特定的前端`web`项目模板使用。
+此项目用于`umi`插件[umi-plugin-hwebg](https://github.com/JinChengJoker/umi-plugin-hwebg)调用。
+
+
+## 开始开发
+
+### 安装依赖
+
+```bash
+$ yarn install
+```
+
+### 运行
+
+```bash
+$ yarn start
+```
+
+
+## 打包编译
+
+```bash
+$ yarn build
+```
