@@ -1,11 +1,8 @@
 {
   "name": "hwebg",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "根据 swagger 文件生成 CURD 页面",
   "main": "dist/index.js",
-  "bin": {
-    "hwebg": "dist/index.js"
-  },
   "files": [
     "/dist",
     "/template"

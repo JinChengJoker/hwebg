@@ -5,20 +5,10 @@ import * as path from 'path';
 import type { OpenApi, Service, tableProperties } from '../typing'
 
 const processPath = process.cwd()
-const openApiFilePath = path.join(processPath, '/config/openapi.ts')
 const templateFilePath = path.join(__dirname, '../template/page')
 const templateString = readFileString(templateFilePath)
 
-if (fs.existsSync(openApiFilePath)) {
-  import(openApiFilePath).then(module => {
-    console.log(module['default'])
-    traverseOpenApiList(module['default'])
-  })
-} else {
-  throw new Error('未在当前目录下找到 config/openapi.ts 文件')
-}
-
-function traverseOpenApiList(openApiList: OpenApi[]) {
+export function traverseOpenApiList(openApiList: OpenApi[]) {
   openApiList.forEach(openApi => {
     if (!openApi.projectName) {
       throw new Error('config/openapi.ts 文件缺少 projectName')
