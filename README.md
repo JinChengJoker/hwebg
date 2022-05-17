@@ -33,7 +33,7 @@ $ pnpm build
 pnpm install hwebg
 ```
 
-### 实例
+### 示例
 
 ```typescript
 import { join } from 'path';
