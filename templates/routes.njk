@@ -1,0 +1,25 @@
+export default [
+{% for item in list -%}
+  {
+    path: '{{base}}/{{item.path}}',
+    routes: [
+      {% for route in item.routes -%}
+      {
+        path: '{{base}}/{{item.path}}/{{route.path}}/list',
+        component: './{{item.path}}/{{route.component}}',
+      },
+      {% endfor %}
+      {
+        component: './404',
+      },
+    ],
+  },
+{% endfor %}
+  {
+    path: '/',
+    redirect: '/home',
+  },
+  {
+    component: './404',
+  },
+];

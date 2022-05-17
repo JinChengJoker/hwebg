@@ -1,0 +1,1086 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "api/ivd/v1/svc_product.proto",
+    "version": "version not set",
+    "projectName": "product"
+  },
+  "tags": [
+    {
+      "name": "ProductService"
+    }
+  ],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/v1/ivd/product-categories": {
+      "get": {
+        "summary": "商品分类列表",
+        "operationId": "ProductService_ListProductCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListProductCategoryReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "title",
+            "description": "分类名称关键字",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "spec_define",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "username",
+            "description": "创建者关键字",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "updated_uid",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "updated_username",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "description": "分页参数，页码（默认为 1）",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page_size",
+            "description": "分页参数，单页记录数（默认为 20）",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "description": "排序参数，指定排序字段（默认为 id）",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "order",
+            "description": "排序参数，指定升、降序，可选值：ASC/DESC（默认为降序）",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "id_in",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "creator_uid_in",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "creator_uid",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "creator",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "updater_uid_in",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "updater_uid",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "updater",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "created_at_gte",
+            "description": "创建时间（起始）",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "created_at_gt",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "created_at_lte",
+            "description": "创建时间（结束）",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "created_at_lt",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "updated_at_gte",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "updated_at_gt",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "updated_at_lte",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "updated_at_lt",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": ["ProductService"]
+      },
+      "post": {
+        "summary": "创建商品分类",
+        "operationId": "ProductService_CreateProductCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateProductCategoryReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateProductCategoryRequest"
+            }
+          }
+        ],
+        "tags": ["ProductService"]
+      }
+    },
+    "/v1/ivd/product-categories/{id}": {
+      "get": {
+        "summary": "商品分类详情",
+        "operationId": "ProductService_GetProductCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetProductCategoryReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": ["ProductService"]
+      },
+      "delete": {
+        "summary": "删除商品分类",
+        "operationId": "ProductService_DeleteProductCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteProductCategoryReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": ["ProductService"]
+      },
+      "put": {
+        "summary": "编辑商品分类",
+        "operationId": "ProductService_UpdateProductCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateProductCategoryReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "description": "分类名称"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "分类简介"
+                },
+                "params": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/v1ProductSpecParamPb"
+                  },
+                  "description": "规格参数，详情参考创建接口"
+                }
+              },
+              "required": ["title", "description", "params"]
+            }
+          }
+        ],
+        "tags": ["ProductService"]
+      }
+    },
+    "/v1/ivd/products": {
+      "get": {
+        "summary": "商品信息列表",
+        "operationId": "ProductService_ListProduct",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListProductReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "category_id",
+            "description": "分类",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "title",
+            "description": "名称",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "product_code",
+            "description": "商品编号",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "is_putaway",
+            "description": "是否上架，0下架，1上架",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "price",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "spec_detail",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "username",
+            "description": "创建者",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "updated_uid",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "updated_username",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "description": "分页参数，页码（默认为 1）",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page_size",
+            "description": "分页参数，单页记录数（默认为 20）",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "description": "排序参数，指定排序字段（默认为 id）",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "order",
+            "description": "排序参数，指定升、降序，可选值：ASC/DESC（默认为降序）",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "id_in",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "creator_uid_in",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "creator_uid",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "creator",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "updater_uid_in",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "updater_uid",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "updater",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "created_at_gte",
+            "description": "创建时间（起始）",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "created_at_gt",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "created_at_lte",
+            "description": "创建时间（结束）",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "created_at_lt",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "updated_at_gte",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "updated_at_gt",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "updated_at_lte",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "updated_at_lt",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": ["ProductService"]
+      },
+      "post": {
+        "summary": "创建商品信息",
+        "operationId": "ProductService_CreateProduct",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateProductReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateProductRequest"
+            }
+          }
+        ],
+        "tags": ["ProductService"]
+      }
+    },
+    "/v1/ivd/products/{id}": {
+      "get": {
+        "summary": "商品信息详情",
+        "operationId": "ProductService_GetProduct",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetProductReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": ["ProductService"]
+      },
+      "delete": {
+        "summary": "删除商品信息",
+        "operationId": "ProductService_DeleteProduct",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteProductReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": ["ProductService"]
+      },
+      "put": {
+        "summary": "编辑商品信息",
+        "operationId": "ProductService_UpdateProduct",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateProductReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "category_id": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "分类"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "商品名称"
+                },
+                "product_code": {
+                  "type": "string",
+                  "description": "商品编号（唯一）"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "简介"
+                },
+                "is_putaway": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "是否上架，0下架，1上架"
+                },
+                "price": {
+                  "type": "number",
+                  "format": "double",
+                  "description": "单价，单位：人民币/元"
+                },
+                "spec_details": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "description": "商品规格参数 map"
+                }
+              },
+              "required": [
+                "title",
+                "product_code",
+                "description",
+                "is_putaway",
+                "price",
+                "spec_details"
+              ]
+            }
+          }
+        ],
+        "tags": ["ProductService"]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1CreateProductCategoryReply": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1CreateProductCategoryRequest": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "分类名称"
+        },
+        "description": {
+          "type": "string",
+          "description": "分类描述"
+        },
+        "params": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1ProductSpecParamPb"
+          },
+          "description": "规格参数，用于商品构建"
+        }
+      },
+      "required": ["title", "description", "params"]
+    },
+    "v1CreateProductReply": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1CreateProductRequest": {
+      "type": "object",
+      "properties": {
+        "category_id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "分类，商品创建时，选择分类后才可配置规格参数"
+        },
+        "title": {
+          "type": "string",
+          "description": "商品名称"
+        },
+        "product_code": {
+          "type": "string",
+          "description": "商品编号"
+        },
+        "description": {
+          "type": "string",
+          "description": "商品简介"
+        },
+        "is_putaway": {
+          "type": "integer",
+          "format": "int32",
+          "description": "是否上架"
+        },
+        "price": {
+          "type": "number",
+          "format": "double",
+          "description": "商品单价，单位：元"
+        },
+        "spec_details": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "商品规格 map，根据分类的规格参数配置，键为规格参数名称，值为参数值。例：样本类型: 唾液"
+        }
+      },
+      "required": [
+        "category_id",
+        "title",
+        "product_code",
+        "description",
+        "is_putaway",
+        "price",
+        "spec_details"
+      ]
+    },
+    "v1DeleteProductCategoryReply": {
+      "type": "object"
+    },
+    "v1DeleteProductReply": {
+      "type": "object"
+    },
+    "v1GetProductCategoryReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/v1ProductCategoryPb"
+        }
+      }
+    },
+    "v1GetProductReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/v1ProductPb"
+        }
+      }
+    },
+    "v1ListProductCategoryReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1ProductCategoryPb"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1ListProductReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1ProductPb"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1ProductCategoryPb": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "title": {
+          "type": "string",
+          "description": "分类名称"
+        },
+        "description": {
+          "type": "string",
+          "description": "简介"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int32",
+          "title": "string spec_define = 4;"
+        },
+        "username": {
+          "type": "string",
+          "description": "创建者"
+        },
+        "updated_uid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "updated_username": {
+          "type": "string",
+          "description": "更新者"
+        },
+        "created_at": {
+          "type": "string",
+          "description": "创建时间"
+        },
+        "updated_at": {
+          "type": "string",
+          "description": "最后更新时间"
+        },
+        "params": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1ProductSpecParamPb"
+          },
+          "description": "分类规格"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "user_id",
+        "username",
+        "updated_uid",
+        "updated_username",
+        "created_at",
+        "updated_at",
+        "params"
+      ]
+    },
+    "v1ProductPb": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "category_id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "分类"
+        },
+        "title": {
+          "type": "string",
+          "description": "商品名称"
+        },
+        "product_code": {
+          "type": "string",
+          "description": "商品编号"
+        },
+        "description": {
+          "type": "string",
+          "description": "简介"
+        },
+        "is_putaway": {
+          "type": "integer",
+          "format": "int32",
+          "description": "是否上架，0下架，1上架"
+        },
+        "price": {
+          "type": "number",
+          "format": "double",
+          "description": "单价，单位：人民币/元"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int32",
+          "title": "string spec_detail = 8;"
+        },
+        "username": {
+          "type": "string",
+          "description": "创建者"
+        },
+        "updated_uid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "updated_username": {
+          "type": "string",
+          "description": "更新者"
+        },
+        "created_at": {
+          "type": "string",
+          "description": "创建时间"
+        },
+        "updated_at": {
+          "type": "string",
+          "description": "最后更新时间"
+        },
+        "category": {
+          "$ref": "#/definitions/v1ProductCategoryPb",
+          "description": "关联分类"
+        },
+        "spec_details": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "商品规格参数 map"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "product_code",
+        "description",
+        "is_putaway",
+        "price",
+        "user_id",
+        "username",
+        "updated_uid",
+        "updated_username",
+        "created_at",
+        "updated_at",
+        "category",
+        "spec_details"
+      ]
+    },
+    "v1ProductSpecParamPb": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "规格名称，例：样本类型"
+        },
+        "is_numeric": {
+          "type": "boolean",
+          "description": "是否为数字，指定商品规格值是否仅允许填写数字"
+        },
+        "unit": {
+          "type": "string",
+          "description": "单位（可空），例：kg"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "规格选项: 指定商品规格的可选值，例：唾液,血液"
+        }
+      },
+      "required": ["name", "is_numeric", "unit", "options"]
+    },
+    "v1UpdateProductCategoryReply": {
+      "type": "object"
+    },
+    "v1UpdateProductReply": {
+      "type": "object"
+    }
+  }
+}

@@ -1,7 +1,7 @@
 {
   "name": "hwebg",
-  "version": "0.3.1",
-  "description": "根据 swagger 文件生成 CURD 页面",
+  "version": "0.4.0",
+  "description": "Generate CURD pages and routes config by openAPI",
   "repository": {
     "type": "git",
     "url": "git+git@github.com:JinChengJoker/hwebg.git"
@@ -15,13 +15,19 @@
     "/template"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node src/index.ts",
+    "test": "ts-node test/test.ts",
     "build": "tsc"
   },
   "devDependencies": {
     "@types/node": "^17.0.32",
+    "@types/nunjucks": "^3.2.1",
+    "@types/prettier": "^2.6.1",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.4"
+  },
+  "dependencies": {
+    "@umijs/fabric": "^2.10.2",
+    "nunjucks": "^3.2.3",
+    "prettier": "^2.6.2"
   }
 }

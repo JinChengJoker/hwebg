@@ -9,12 +9,12 @@ import ProDescriptions from '@ant-design/pro-descriptions';
 import BasicModalForm from '@/components/BasicModalForm';
 import lodash from 'lodash';
 import type { ProFormColumnsType } from '@ant-design/pro-form';
-{{__import_services__}}
+{{import_statment}}
 
-const handleCreate = async (fields: {{__create_request_type__}}) => {
+const handleCreate = async (fields: {{createRequestType}}) => {
   const hide = message.loading('正在添加');
   try {
-    await {{__create_service_name__}}({ ...fields });
+    await {{methods.create}}({ ...fields });
     hide();
     message.success('添加成功');
     return true;
@@ -25,10 +25,10 @@ const handleCreate = async (fields: {{__create_request_type__}}) => {
   }
 };
 
-const handleUpdate = async (fields: Partial<{{__pb_type__}}>, currentRow: {{__pb_type__}}) => {
+const handleUpdate = async (fields: Partial<{{pbType}}>, currentRow: {{pbType}}) => {
   const hide = message.loading('正在修改');
   try {
-    await {{__update_service_name__}}(
+    await {{methods.update}}(
       { id: currentRow?.id },
       {
         ...currentRow,
@@ -45,10 +45,10 @@ const handleUpdate = async (fields: Partial<{{__pb_type__}}>, currentRow: {{__pb
   }
 };
 
-const handleDel = async (fields: {{__pb_type__}}) => {
+const handleDel = async (fields: {{pbType}}) => {
   const hide = message.loading('正在删除');
   try {
-    await {{__delete_service_name__}}({
+    await {{methods.delete}}({
       id: fields.id,
     });
     hide();
@@ -66,10 +66,10 @@ const TableList: React.FC = () => {
   const [updateModalVisible, setUpdateModalVisible] = useState<boolean>(false);
   const [detailVisible, setDetailVisible] = useState<boolean>(false);
   const actionRef = useRef<ActionType>();
-  const [currentRow, setCurrentRow] = useState<{{__pb_type__}}>();
-  const [selectedRows, setSelectedRows] = useState<{{__pb_type__}}[]>([]);
+  const [currentRow, setCurrentRow] = useState<{{pbType}}>();
+  const [selectedRows, setSelectedRows] = useState<{{pbType}}[]>([]);
 
-  const columns: ProFormColumnsType<{{__pb_type__}}>[] = [
+  const columns: ProFormColumnsType<{{pbType}}>[] = [
     {
       title: 'ID',
       dataIndex: 'id',
@@ -77,7 +77,12 @@ const TableList: React.FC = () => {
       hideInDescriptions: true,
       hideInForm: true,
     },
-    {{__columns__}},
+    {% for column in columns -%}
+    {
+      title: '{{column.title}}',
+      dataIndex: '{{column.dataIndex}}',
+    },
+    {% endfor %}
     {
       title: '操作',
       dataIndex: 'option',
@@ -126,7 +131,7 @@ const TableList: React.FC = () => {
 
   return (
     <PageContainer>
-      <ProTable<{{__pb_type__}}>
+      <ProTable<{{pbType}}>
         actionRef={actionRef}
         rowKey="id"
         toolBarRender={() => [
@@ -141,18 +146,18 @@ const TableList: React.FC = () => {
           </Button>,
         ]}
         request={(params) =>
-          {{__list_service_name__}}({
+          {{methods.list}}({
             ...lodash.omit(params, ['current', 'pageSize']),
             page: String(params.current),
             page_size: String(params.pageSize),
           })
         }
-        columns={columns as ProColumns<{{__pb_type__}}>[]}
-        rowSelection={{
+        columns={columns as ProColumns<{{pbType}}>[]}
+        rowSelection={% raw %}{{
           onChange: (_, rows) => {
             setSelectedRows(rows);
           },
-        }}
+        }}{% endraw %}
       />
       {selectedRows?.length > 0 && (
         <FooterToolbar
@@ -160,9 +165,9 @@ const TableList: React.FC = () => {
             <div>
               已选择{' '}
               <a
-                style={{
+                style={% raw %}{{
                   fontWeight: 600,
-                }}
+                }}{% endraw %}
               >
                 {selectedRows.length}
               </a>{' '}
@@ -188,11 +193,11 @@ const TableList: React.FC = () => {
         columns={columns}
         visible={createModalVisible}
         onVisibleChange={setCreateModalVisible}
-        modalProps={{
+        modalProps={% raw %}{{
           destroyOnClose: true,
-        }}
+        }}{% endraw %}
         onFinish={async (value) => {
-          const success = await handleCreate(value as {{__create_request_type__}});
+          const success = await handleCreate(value as {{createRequestType}});
           if (success) {
             setCreateModalVisible(false);
             if (actionRef.current) {
@@ -208,15 +213,15 @@ const TableList: React.FC = () => {
         columns={columns}
         visible={updateModalVisible}
         onVisibleChange={setUpdateModalVisible}
-        modalProps={{
+        modalProps={% raw %}{{
           destroyOnClose: true,
           onCancel: () => {
             setCurrentRow(undefined);
           },
-        }}
+        }}{% endraw %}
         initialValues={currentRow}
         onFinish={async (value) => {
-          const success = await handleUpdate(value, currentRow as {{__pb_type__}});
+          const success = await handleUpdate(value, currentRow as {{pbType}});
           if (success) {
             setUpdateModalVisible(false);
             setCurrentRow(undefined);
@@ -237,16 +242,16 @@ const TableList: React.FC = () => {
         closable={false}
       >
         {currentRow?.id && (
-          <ProDescriptions<{{__pb_type__}}>
+          <ProDescriptions<{{pbType}}>
             title={currentRow?.title}
             column={2}
             request={async () => ({
               data: currentRow || {},
             })}
-            params={{
+            params={% raw %}{{
               id: currentRow?.id,
-            }}
-            columns={columns as ProDescriptionsItemProps<{{__pb_type__}}>[]}
+            }}{% endraw %}
+            columns={columns as ProDescriptionsItemProps<{{pbType}}>[]}
           />
         )}
       </Drawer>

@@ -1,4 +1,4 @@
-export type OpenApi = {
+export type OpenApiConfig = {
   schemaPath: string;
   projectName: string;
 }
@@ -22,10 +22,10 @@ export type ServiceModule = {
   createRequestType: string;
 }
 
-export type Service = {
+export type Swagger = {
   projectName: string;
   serviceName: string;
-  serviceModules: ServiceModule[]
+  modules: ServiceModule[]
 }
 
 export type tableProperties = Record<string, {

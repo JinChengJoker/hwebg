@@ -1,0 +1,647 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "api/ivd/v1/svc_contracts.proto",
+    "version": "version not set",
+    "projectName": "contracts"
+  },
+  "tags": [
+    {
+      "name": "ContractService"
+    }
+  ],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/v1/ivd/contracts": {
+      "get": {
+        "summary": "合同列表",
+        "operationId": "ContractService_ListContract",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListContractReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "title",
+            "description": "合同名称",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "contract_code",
+            "description": "合同编号",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "customer_id",
+            "description": "客户 id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "customer_name",
+            "description": "客户名称",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sale_id",
+            "description": "对接销售 id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sale_name",
+            "description": "销售姓名",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "effect_date",
+            "description": "生效日期",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "expiry_date",
+            "description": "失效日期",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "file_text",
+            "description": "合同文件 link，以逗号分隔",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "updated_uid",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "updated_username",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "id_in",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "creator_uid_in",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "creator_uid",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "creator",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "updater_uid_in",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "updater_uid",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "updater",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "created_at_gte",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "created_at_gt",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "created_at_lte",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "created_at_lt",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "updated_at_gte",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "updated_at_gt",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "updated_at_lte",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "updated_at_lt",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": ["ContractService"]
+      },
+      "post": {
+        "summary": "创建合同",
+        "operationId": "ContractService_CreateContract",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateContractReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateContractRequest"
+            }
+          }
+        ],
+        "tags": ["ContractService"]
+      }
+    },
+    "/v1/ivd/contracts/{id}": {
+      "get": {
+        "summary": "合同详情",
+        "operationId": "ContractService_GetContract",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetContractReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": ["ContractService"]
+      },
+      "delete": {
+        "summary": "删除合同",
+        "operationId": "ContractService_DeleteContract",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteContractReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": ["ContractService"]
+      },
+      "put": {
+        "summary": "编辑合同",
+        "operationId": "ContractService_UpdateContract",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateContractReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "合同id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "description": "合同名称"
+                },
+                "contract_code": {
+                  "type": "string",
+                  "description": "合同编号"
+                },
+                "customer_id": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "客户 id"
+                },
+                "customer_name": {
+                  "type": "string",
+                  "description": "客户名称"
+                },
+                "sale_id": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "对接销售 id"
+                },
+                "sale_name": {
+                  "type": "string",
+                  "description": "销售姓名"
+                },
+                "effect_date": {
+                  "type": "string",
+                  "description": "生效日期"
+                },
+                "expiry_date": {
+                  "type": "string",
+                  "description": "失效日期"
+                },
+                "file_text": {
+                  "type": "string",
+                  "description": "合同文件 link，以逗号分隔"
+                },
+                "product_text": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/v1ProductText"
+                  },
+                  "description": "合同销售的商品 json类型"
+                }
+              },
+              "required": [
+                "title",
+                "contract_code",
+                "customer_id",
+                "customer_name",
+                "sale_id",
+                "sale_name",
+                "effect_date",
+                "expiry_date",
+                "product_text"
+              ]
+            }
+          }
+        ],
+        "tags": ["ContractService"]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1ContractPb": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "合同id"
+        },
+        "title": {
+          "type": "string",
+          "description": "合同名称"
+        },
+        "contract_code": {
+          "type": "string",
+          "description": "合同编号"
+        },
+        "customer_id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "客户 id"
+        },
+        "customer_name": {
+          "type": "string",
+          "description": "客户名称"
+        },
+        "sale_id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "对接销售 id"
+        },
+        "sale_name": {
+          "type": "string",
+          "description": "销售姓名"
+        },
+        "effect_date": {
+          "type": "string",
+          "description": "生效日期"
+        },
+        "expiry_date": {
+          "type": "string",
+          "description": "失效日期"
+        },
+        "file_text": {
+          "type": "string",
+          "description": "合同文件 link，以逗号分隔"
+        },
+        "product_text": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1ProductText"
+          },
+          "description": "合同销售的商品 json类型"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "username": {
+          "type": "string"
+        },
+        "updated_uid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "updated_username": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        }
+      }
+    },
+    "v1CreateContractReply": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1CreateContractRequest": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "合同名称"
+        },
+        "contract_code": {
+          "type": "string",
+          "description": "合同编号"
+        },
+        "customer_id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "客户 id"
+        },
+        "customer_name": {
+          "type": "string",
+          "description": "客户名称"
+        },
+        "sale_id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "对接销售 id"
+        },
+        "sale_name": {
+          "type": "string",
+          "description": "销售姓名"
+        },
+        "effect_date": {
+          "type": "string",
+          "description": "生效日期"
+        },
+        "expiry_date": {
+          "type": "string",
+          "description": "失效日期"
+        },
+        "file_text": {
+          "type": "string",
+          "description": "合同文件 link，以逗号分隔"
+        },
+        "product_text": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1ProductText"
+          },
+          "description": "合同销售的商品 json类型"
+        }
+      },
+      "required": [
+        "title",
+        "contract_code",
+        "customer_id",
+        "customer_name",
+        "sale_id",
+        "sale_name",
+        "effect_date",
+        "expiry_date",
+        "product_text"
+      ]
+    },
+    "v1DeleteContractReply": {
+      "type": "object"
+    },
+    "v1GetContractReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/v1ContractPb"
+        }
+      }
+    },
+    "v1ListContractReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1ContractPb"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1ProductText": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "商品id"
+        },
+        "price": {
+          "type": "number",
+          "format": "double",
+          "description": "商品价格"
+        }
+      }
+    },
+    "v1UpdateContractReply": {
+      "type": "object"
+    }
+  }
+}

@@ -1,43 +1,5 @@
-## 说明
-
-此项目用于`umi`插件[umi-plugin-hwebg](https://github.com/JinChengJoker/umi-plugin-hwebg)调用。
-
-
-## 开发
-
-### 安装依赖
-
-```bash
-$ pnpm install
-```
-
-### 运行测试
-
-```bash
-$ pnpm test
-```
-
-
-## 打包编译
-
-```bash
-$ pnpm build
-```
-
-
-## 使用
-
-### 安装
-
-```bash
-pnpm install hwebg
-```
-
-### 实例
-
-```typescript
 import { join } from 'path';
-import { generateRoutes, generatePages } from 'hwebg';
+import { generateRoutes, generatePages } from '../src/index'
 
 const openApi = [
   {
@@ -58,9 +20,5 @@ const openApi = [
   },
 ]
 
-// 生成 pages
 generatePages(openApi)
-
-// 生成 routes
-generateRoutes(openApi, '/')
-```
+generateRoutes(openApi, '/ivd')

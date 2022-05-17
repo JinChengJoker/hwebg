@@ -1,57 +1,58 @@
 #!/usr/bin/env node
 
-import * as fs from 'fs';
 import * as path from 'path';
-import type { OpenApi, Service, tableProperties } from '../typing'
+import * as nunjucks from 'nunjucks';
+import type { Swagger, OpenApiConfig, tableProperties } from '../typing'
+import { writeFile, readFileString } from './utils'
 
+let pageTemplate: string
 const processPath = process.cwd()
-const templateFilePath = path.join(__dirname, '../template/page')
-const templateString = readFileString(templateFilePath)
+const pageTemplateFilePath = path.join(__dirname, '../templates/page.njk')
+const routesTemplateFilePath = path.join(__dirname, '../templates/routes.njk')
 
-export function traverseOpenApiList(openApiList: OpenApi[]) {
-  openApiList.forEach(openApi => {
-    if (!openApi.projectName) {
-      throw new Error('config/openapi.ts 文件缺少 projectName')
-    }
-    if (!openApi.schemaPath) {
-      throw new Error('config/openapi.ts 文件缺少 schemaPath')
-    }
-    if (!fs.existsSync(openApi.schemaPath)) return
+nunjucks.configure({
+  autoescape: false,
+});
 
-    const swaggerFileString = readFileString(openApi.schemaPath)
-    const swagger = JSON.parse(swaggerFileString)
-    const service = generateService(swagger, openApi.projectName)
+export const generatePages = (openApiConfigs: OpenApiConfig[]) => {
+  pageTemplate = readFileString(pageTemplateFilePath)
+  const swaggers = traverseOpenApiConfigs(openApiConfigs)
+  swaggers.forEach(swagger => generateModuleFile(swagger))
+}
 
-    generateModuleFile(service)
+export const generateRoutes = (openApiConfigs: OpenApiConfig[], base: string) => {
+  const swaggers = traverseOpenApiConfigs(openApiConfigs)
+  genarateRouteFile(swaggers, base)
+}
+
+const traverseOpenApiConfigs = (openApiConfigs: OpenApiConfig[]) => {
+  return openApiConfigs.map(openApiConfig => {
+    const openApiFileString = readFileString(openApiConfig.schemaPath)
+    const openApi = JSON.parse(openApiFileString)
+    return parseOpenApi(openApi, openApiConfig.projectName)
   })
 }
 
-function readFileString(filepath: string) {
-  return fs.readFileSync(filepath, { encoding: 'utf-8' }).toString()
-}
-
-function generateService(swagger: any, projectName: string) {
-  const { paths, definitions } = swagger
-  const serviceName = swagger.tags[0].name
-  const service: Service = {
+const parseOpenApi = (openApi: any, projectName: string) => {
+  const { paths, definitions } = openApi
+  const serviceName = openApi.tags[0].name
+  const swagger: Swagger = {
     projectName,
     serviceName,
-    serviceModules: []
+    modules: []
   }
-
   Object.keys(paths).forEach(pathName => {
     Object.keys(paths[pathName]).forEach(methodName => {
       const method = paths[pathName][methodName]
       const operationId = method['operationId']
       const listPrefix = `${serviceName}_List`
-
       if (operationId.includes(listPrefix)) {
         const listReplyDef = method['responses']['200']['schema']['$ref'].replace('#/definitions/', '')
         const tableDef = definitions[listReplyDef]['properties']['data']['items']['$ref'].replace('#/definitions/', '')
         const tableProperties = definitions[tableDef]['properties']
         const columns = transformToColumns(tableProperties)
         const moduleName = operationId.replace(listPrefix, '')
-        service.serviceModules.push({
+        swagger.modules.push({
           moduleName,
           methods: {
             list: `${serviceName}List${moduleName}`,
@@ -66,34 +67,46 @@ function generateService(swagger: any, projectName: string) {
       }
     })
   })
-
-  return service
+  return swagger
 }
 
-function generateModuleFile(service: Service) {
-  service.serviceModules.forEach(module => {
-    const moduleDirPath = path.join(processPath, 'src/pages', service.projectName, module.moduleName)
-    const moduleIndexPath = path.join(moduleDirPath, 'index.tsx')
-    const methodsString = Object.keys(module.methods).map(i => module.methods[i]).join(', ')
-    const columnsString = module.columns.map(column => JSON.stringify(column)).join(',\n')
-    const fileString = templateString
-      .replace(/{{__import_services__}}/, `import {${methodsString}} from '@/services/${service.projectName}/${service.serviceName}';`)
-      .replace(/{{__columns__}}/, columnsString)
-      .replace(/{{__create_request_type__}}/g, module.createRequestType)
-      .replace(/{{__pb_type__}}/g, module.pbType)
-      .replace(/{{__list_service_name__}}/, module.methods.list)
-      .replace(/{{__create_service_name__}}/, module.methods.create)
-      .replace(/{{__update_service_name__}}/, module.methods.update)
-      .replace(/{{__delete_service_name__}}/, module.methods.delete)
-
-    fs.mkdirSync(moduleDirPath, { recursive: true })
-    fs.writeFileSync(moduleIndexPath, fileString, { flag: 'w+' })
-  })
-}
-
-function transformToColumns(properties: tableProperties) {
+const transformToColumns = (properties: tableProperties) => {
   return Object.keys(properties).map(key => ({
     title: properties[key].description || key,
     dataIndex: key
   }))
+}
+
+const generateModuleFile = (swagger: Swagger) => {
+  swagger.modules.forEach(module => {
+    const moduleFolderPath = path.join(processPath, 'src/pages', swagger.projectName, module.moduleName)
+    const moduleFileName = 'index.tsx'
+    const methodsString = Object.keys(module.methods).map(i => module.methods[i]).join(', ')
+    const pageFileString = nunjucks.renderString(pageTemplate, {
+      import_statment: `import {${methodsString}} from '@/services/${swagger.projectName}/${swagger.serviceName}';`,
+      columns: module.columns,
+      createRequestType: module.createRequestType,
+      pbType: module.pbType,
+      methods: module.methods,
+    })
+    writeFile(moduleFolderPath, moduleFileName, pageFileString)
+  })
+}
+
+const genarateRouteFile = (swaggers: Swagger[], base: string) => {
+  const routeFolderPath = path.join(processPath, '/config')
+  const routeFileName = 'routes.ts'
+  const template = readFileString(routesTemplateFilePath)
+  const list = swaggers.map(swagger => ({
+    path: swagger.projectName,
+    routes: swagger.modules.map(m => ({
+      path: m.moduleName.toLocaleLowerCase(),
+      component: m.moduleName
+    }))
+  }))
+  const routeFileString = nunjucks.renderString(template, {
+    base,
+    list,
+  })
+  writeFile(routeFolderPath, routeFileName, routeFileString)
 }

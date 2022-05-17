@@ -1,0 +1,1332 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "api/ivd/v1/svc_order.proto",
+    "version": "version not set",
+    "projectName": "order"
+  },
+  "tags": [
+    {
+      "name": "OrderService"
+    }
+  ],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/v1/ivd/dispatch-bills": {
+      "get": {
+        "summary": "发货单列表",
+        "operationId": "OrderService_ListDispatchBill",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListDispatchBillReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "order_sn",
+            "description": "订单编号",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "product_title",
+            "description": "商品名称",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "description": "物流状态",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "institution",
+            "description": "物流机构",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "tracking_num",
+            "description": "物流单号",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "condition",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "remark",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "username",
+            "description": "创建者",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "created_at_gte",
+            "description": "创建时间（起始）",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "created_at_lte",
+            "description": "创建时间（结束）",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": ["OrderService"]
+      },
+      "post": {
+        "summary": "创建发货单",
+        "description": "订单已确认收货后，不可新增发货单。订单的发货单总商品数不得超过订单上登记的购买数。",
+        "operationId": "OrderService_CreateDispatchBill",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateDispatchBillReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateDispatchBillRequest"
+            }
+          }
+        ],
+        "tags": ["OrderService"]
+      }
+    },
+    "/v1/ivd/dispatch-bills/{id}": {
+      "get": {
+        "summary": "发货单详情",
+        "operationId": "OrderService_GetDispatchBill",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetDispatchBillReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": ["OrderService"]
+      },
+      "delete": {
+        "summary": "删除发货单",
+        "operationId": "OrderService_DeleteDispatchBill",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteDispatchBillReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": ["OrderService"]
+      },
+      "put": {
+        "summary": "编辑发货单",
+        "description": "已确认收货的发货单不可编辑",
+        "operationId": "OrderService_UpdateDispatchBill",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateDispatchBillReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "product_num": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "交付商品数"
+                },
+                "delivery_at": {
+                  "type": "string",
+                  "description": "发货时间"
+                },
+                "institution": {
+                  "type": "string",
+                  "description": "物流机构"
+                },
+                "tracking_num": {
+                  "type": "string",
+                  "description": "物流单号"
+                },
+                "condition": {
+                  "type": "string",
+                  "description": "运输条件"
+                },
+                "remark": {
+                  "type": "string",
+                  "description": "备注"
+                }
+              },
+              "required": [
+                "product_num",
+                "delivery_at",
+                "institution",
+                "tracking_num",
+                "condition",
+                "remark"
+              ]
+            }
+          }
+        ],
+        "tags": ["OrderService"]
+      }
+    },
+    "/v1/ivd/dispatch-bills/{id}/confirm-receive-goods": {
+      "put": {
+        "summary": "确认收货",
+        "description": "销售向客户确认已收到商品后，核对发货单更新物流状态",
+        "operationId": "OrderService_ConfirmReceiveGoods",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ConfirmReceiveGoodsReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "状态，0收货异常，1确认收货"
+                },
+                "remark": {
+                  "type": "string",
+                  "description": "备注"
+                }
+              }
+            }
+          }
+        ],
+        "tags": ["OrderService"]
+      }
+    },
+    "/v1/ivd/orders": {
+      "get": {
+        "summary": "订单列表",
+        "operationId": "OrderService_ListOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListOrderReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "order_sn",
+            "description": "订单编号",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "description": "订单状态",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sale_id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sale",
+            "description": "销售姓名",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "contract_id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "contract_title",
+            "description": "合同名称",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "customer_id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "customer_name",
+            "description": "客户名称",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "product_id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "product_title",
+            "description": "商品名称",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "description": "收件人",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "tel",
+            "description": "联系电话",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "remark",
+            "description": "备注",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "username",
+            "description": "创建者",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "updated_uid",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "updated_username",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "description": "分页参数，页码",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page_size",
+            "description": "分页参数，单页行数",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "description": "排序参数，排序字段",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "order",
+            "description": "排序参数，排序方式",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "created_at_gte",
+            "description": "创建时间（起始）",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "created_at_lte",
+            "description": "创建时间（结束）",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": ["OrderService"]
+      },
+      "post": {
+        "summary": "创建订单",
+        "operationId": "OrderService_CreateOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateOrderReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateOrderRequest"
+            }
+          }
+        ],
+        "tags": ["OrderService"]
+      }
+    },
+    "/v1/ivd/orders/{id}": {
+      "get": {
+        "summary": "订单详情",
+        "operationId": "OrderService_GetOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetOrderReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": ["OrderService"]
+      },
+      "delete": {
+        "summary": "删除订单",
+        "operationId": "OrderService_DeleteOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteOrderReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": ["OrderService"]
+      },
+      "put": {
+        "summary": "编辑订单",
+        "description": "仅允许编辑状态为等待处理的订单",
+        "operationId": "OrderService_UpdateOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateOrderReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "sale_id": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "sale": {
+                  "type": "string",
+                  "description": "销售"
+                },
+                "contract_id": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "合同 id"
+                },
+                "customer_id": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "客户 id"
+                },
+                "product_id": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "商品 id"
+                },
+                "product_price": {
+                  "type": "number",
+                  "format": "double",
+                  "description": "销售单价"
+                },
+                "product_num": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "购买数量"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "收件人"
+                },
+                "tel": {
+                  "type": "string",
+                  "description": "联系电话"
+                },
+                "address": {
+                  "type": "string",
+                  "description": "详细地址"
+                },
+                "remark": {
+                  "type": "string",
+                  "description": "备注"
+                }
+              },
+              "required": [
+                "sale_id",
+                "sale",
+                "contract_id",
+                "customer_id",
+                "product_id",
+                "product_price",
+                "product_num",
+                "name",
+                "tel",
+                "address",
+                "remark"
+              ]
+            }
+          }
+        ],
+        "tags": ["OrderService"]
+      }
+    },
+    "/v1/ivd/orders/{id}/cancel-order": {
+      "put": {
+        "summary": "取消订单",
+        "description": "发货部门查看等待处理的订单，若无法发货，与销售沟通后，由销售取消订单",
+        "operationId": "OrderService_CancelOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CancelOrderReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "remark": {
+                  "type": "string",
+                  "description": "备注"
+                }
+              }
+            }
+          }
+        ],
+        "tags": ["OrderService"]
+      }
+    },
+    "/v1/ivd/orders/{id}/count-dispatch-product-num": {
+      "get": {
+        "summary": "统计发货商品数量",
+        "description": "创建或修改发货单时，根据此接口统计值来计算剩余可交付的商品最大数量",
+        "operationId": "OrderService_CountDispatchProductNum",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CountDispatchBillProductNumReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": ["OrderService"]
+      }
+    },
+    "/v1/ivd/orders/{id}/prepare-delivery-goods": {
+      "put": {
+        "summary": "准备发货",
+        "description": "发货部门查看等待处理的订单，确认可发货后，变更订单状态为开始备货",
+        "operationId": "OrderService_PrepareDeliveryGoods",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1PrepareDeliveryGoodsReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "remark": {
+                  "type": "string",
+                  "description": "备注"
+                }
+              }
+            }
+          }
+        ],
+        "tags": ["OrderService"]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1CancelOrderReply": {
+      "type": "object"
+    },
+    "v1ConfirmReceiveGoodsReply": {
+      "type": "object"
+    },
+    "v1CountDispatchBillProductNumReply": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "订单发货商品总数"
+        }
+      }
+    },
+    "v1CreateDispatchBillReply": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1CreateDispatchBillRequest": {
+      "type": "object",
+      "properties": {
+        "order_sn": {
+          "type": "string",
+          "description": "订单编号"
+        },
+        "product_title": {
+          "type": "string",
+          "description": "商品名称"
+        },
+        "product_num": {
+          "type": "integer",
+          "format": "int32",
+          "description": "交付商品数"
+        },
+        "delivery_at": {
+          "type": "string",
+          "description": "发货时间"
+        },
+        "institution": {
+          "type": "string",
+          "description": "物流机构"
+        },
+        "tracking_num": {
+          "type": "string",
+          "description": "物流单号"
+        },
+        "condition": {
+          "type": "string",
+          "description": "运输条件"
+        },
+        "remark": {
+          "type": "string",
+          "description": "备注"
+        }
+      },
+      "required": [
+        "order_sn",
+        "product_title",
+        "product_num",
+        "delivery_at",
+        "institution",
+        "tracking_num",
+        "condition",
+        "remark"
+      ]
+    },
+    "v1CreateOrderReply": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1CreateOrderRequest": {
+      "type": "object",
+      "properties": {
+        "sale_id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "销售 id"
+        },
+        "sale": {
+          "type": "string",
+          "description": "销售姓名"
+        },
+        "contract_id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "合同 id"
+        },
+        "customer_id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "客户 id"
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "商品 id"
+        },
+        "product_price": {
+          "type": "number",
+          "format": "double",
+          "description": "商品单价"
+        },
+        "product_num": {
+          "type": "integer",
+          "format": "int32",
+          "description": "购买数量"
+        },
+        "name": {
+          "type": "string",
+          "description": "收货人姓名"
+        },
+        "tel": {
+          "type": "string",
+          "description": "手机号"
+        },
+        "address": {
+          "type": "string",
+          "description": "详细地址"
+        },
+        "remark": {
+          "type": "string",
+          "description": "备注"
+        }
+      },
+      "required": [
+        "sale_id",
+        "sale",
+        "contract_id",
+        "customer_id",
+        "product_id",
+        "product_price",
+        "product_num",
+        "name",
+        "tel",
+        "address",
+        "remark"
+      ]
+    },
+    "v1DeleteDispatchBillReply": {
+      "type": "object"
+    },
+    "v1DeleteOrderReply": {
+      "type": "object"
+    },
+    "v1DispatchBillPb": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "order_sn": {
+          "type": "string",
+          "description": "订单编号"
+        },
+        "product_title": {
+          "type": "string",
+          "description": "商品名称"
+        },
+        "product_num": {
+          "type": "integer",
+          "format": "int32",
+          "description": "交付数量"
+        },
+        "status": {
+          "$ref": "#/definitions/v1TrackingStatus",
+          "description": "物流状态"
+        },
+        "delivery_at": {
+          "type": "string",
+          "description": "发货时间"
+        },
+        "received_at": {
+          "type": "string",
+          "description": "确认收货时间"
+        },
+        "institution": {
+          "type": "string",
+          "description": "物流机构"
+        },
+        "tracking_num": {
+          "type": "string",
+          "description": "物流单号"
+        },
+        "condition": {
+          "type": "string",
+          "description": "运输条件"
+        },
+        "remark": {
+          "type": "string",
+          "description": "备注"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "username": {
+          "type": "string",
+          "description": "创建者"
+        },
+        "updated_uid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "updated_username": {
+          "type": "string",
+          "description": "更新者"
+        },
+        "created_at": {
+          "type": "string",
+          "description": "创建时间"
+        },
+        "updated_at": {
+          "type": "string",
+          "description": "最后更新时间"
+        },
+        "order_id": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "id",
+        "order_id",
+        "order_sn",
+        "product_title",
+        "product_num",
+        "status",
+        "delivery_at",
+        "received_at",
+        "institution",
+        "tracking_num",
+        "condition",
+        "remark",
+        "user_id",
+        "username",
+        "updated_uid",
+        "updated_username",
+        "created_at",
+        "updated_at"
+      ]
+    },
+    "v1GetDispatchBillReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/v1DispatchBillPb"
+        }
+      }
+    },
+    "v1GetOrderReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/v1OrderPb"
+        }
+      }
+    },
+    "v1ListDispatchBillReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1DispatchBillPb"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1ListOrderReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1OrderPb"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1OrderPb": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "order_sn": {
+          "type": "string",
+          "description": "订单编号"
+        },
+        "status": {
+          "$ref": "#/definitions/v1OrderStatus",
+          "description": "订单状态"
+        },
+        "sale_id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sale": {
+          "type": "string",
+          "description": "销售"
+        },
+        "contract_id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "contract_title": {
+          "type": "string",
+          "description": "合同名称"
+        },
+        "customer_id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "customer_name": {
+          "type": "string",
+          "description": "客户名称"
+        },
+        "product_id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "product_title": {
+          "type": "string",
+          "description": "商品名称"
+        },
+        "product_price": {
+          "type": "number",
+          "format": "double",
+          "description": "销售单价"
+        },
+        "product_num": {
+          "type": "integer",
+          "format": "int32",
+          "description": "购买数量"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double",
+          "description": "订单金额，单位：元"
+        },
+        "name": {
+          "type": "string",
+          "description": "收件人"
+        },
+        "tel": {
+          "type": "string",
+          "description": "联系电话"
+        },
+        "address": {
+          "type": "string",
+          "description": "详细地址"
+        },
+        "remark": {
+          "type": "string",
+          "description": "备注"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "username": {
+          "type": "string",
+          "description": "录单人"
+        },
+        "updated_uid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "updated_username": {
+          "type": "string",
+          "description": "更新者"
+        },
+        "created_at": {
+          "type": "string",
+          "description": "创建时间"
+        },
+        "updated_at": {
+          "type": "string",
+          "description": "最后更新时间"
+        },
+        "dispatch_bills": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1DispatchBillPb"
+          },
+          "description": "关联发货单"
+        }
+      },
+      "required": [
+        "id",
+        "order_sn",
+        "status",
+        "sale_id",
+        "sale",
+        "contract_id",
+        "contract_title",
+        "customer_id",
+        "customer_name",
+        "product_id",
+        "product_title",
+        "product_price",
+        "product_num",
+        "amount",
+        "name",
+        "tel",
+        "address",
+        "remark",
+        "user_id",
+        "username",
+        "updated_uid",
+        "updated_username",
+        "created_at",
+        "updated_at",
+        "dispatch_bills"
+      ]
+    },
+    "v1OrderStatus": {
+      "type": "string",
+      "enum": [
+        "WAIT_PROCESSED",
+        "CANCELED",
+        "START_STOCK_UP",
+        "HAS_SHIPPED",
+        "ABNORMAL_RECEIVING",
+        "CONFIRM_RECEIPT",
+        "HAS_FINISHED"
+      ],
+      "default": "WAIT_PROCESSED",
+      "description": "- WAIT_PROCESSED: 0 等待处理\n - CANCELED: 5 取消订单\n - START_STOCK_UP: 10 开始备货\n - HAS_SHIPPED: 20 已发货\n - ABNORMAL_RECEIVING: 25 收货异常\n - CONFIRM_RECEIPT: 30 确认收货\n - HAS_FINISHED: 40 已完成",
+      "title": "订单状态\n 等待处理 -\u003e 开始备货/取消订单 -\u003e 已发货 -\u003e 收货异常 -\u003e 确认收货 -\u003e 已完成"
+    },
+    "v1PrepareDeliveryGoodsReply": {
+      "type": "object"
+    },
+    "v1TrackingStatus": {
+      "type": "string",
+      "enum": ["GOODS_HAS_SHIPPED", "GOODS_ABNORMAL_RECEIVING", "GOODS_CONFIRM_RECEIPT"],
+      "default": "GOODS_HAS_SHIPPED",
+      "description": "- GOODS_HAS_SHIPPED: 0 已发货\n - GOODS_ABNORMAL_RECEIVING: 10 收货异常\n - GOODS_CONFIRM_RECEIPT: 20 确认收货",
+      "title": "物流状态"
+    },
+    "v1UpdateDispatchBillReply": {
+      "type": "object"
+    },
+    "v1UpdateOrderReply": {
+      "type": "object"
+    }
+  }
+}
