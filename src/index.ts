@@ -20,7 +20,7 @@ export const generatePages = (openApiConfigs: OpenApiConfig[]) => {
   swaggers.forEach(swagger => generateModuleFile(swagger))
 }
 
-export const generateRoutes = (openApiConfigs: OpenApiConfig[], base: string) => {
+export const generateRoutes = (openApiConfigs: OpenApiConfig[], base: string = '/') => {
   const swaggers = traverseOpenApiConfigs(openApiConfigs)
   genarateRouteFile(swaggers, base)
 }

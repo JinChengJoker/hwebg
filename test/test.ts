@@ -21,4 +21,4 @@ const openApi = [
 ]
 
 generatePages(openApi)
-generateRoutes(openApi, '/ivd')
+generateRoutes(openApi, '/')
