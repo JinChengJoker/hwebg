@@ -1,6 +1,6 @@
 {
   "name": "hwebg",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "Generate CURD pages and routes config by openAPI",
   "repository": {
     "type": "git",
@@ -22,12 +22,14 @@
     "@types/node": "^17.0.32",
     "@types/nunjucks": "^3.2.1",
     "@types/prettier": "^2.6.1",
+    "openapi3-ts": "^2.0.2",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.4"
   },
   "dependencies": {
     "@umijs/fabric": "^2.10.2",
     "nunjucks": "^3.2.3",
-    "prettier": "^2.6.2"
+    "prettier": "^2.6.2",
+    "swagger2openapi": "^7.0.8"
   }
 }

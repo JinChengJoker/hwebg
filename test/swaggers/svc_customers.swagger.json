@@ -2,8 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "api/ivd/v1/svc_customers.proto",
-    "version": "version not set",
-    "projectName": "customers"
+    "version": "version not set"
   },
   "tags": [
     {

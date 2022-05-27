@@ -1,12 +1,12 @@
 export default [
-{% for item in list -%}
+{% for module in modules -%}
   {
-    path: '{{base}}{{item.path}}',
+    path: '{{base}}{{module.path}}',
     routes: [
-      {% for route in item.routes -%}
+      {% for route in module.routes -%}
       {
-        path: '{{base}}{{item.path}}/{{route.path}}/list',
-        component: './{{item.path}}/{{route.component}}',
+        path: '{{base}}{{module.path}}/{{route}}/list',
+        component: './{{module.path}}/{{route}}',
       },
       {% endfor %}
       {

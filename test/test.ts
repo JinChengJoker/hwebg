@@ -18,7 +18,15 @@ const openApi = [
     schemaPath: join(__dirname, '/swaggers/svc_product.swagger.json'),
     projectName: 'product',
   },
+  {
+    schemaPath: join(__dirname, '/swaggers/hapsms.swagger.json'),
+    projectName: 'hapsms',
+  },
+  {
+    schemaPath: join(__dirname, '/swaggers/test.swagger.json'),
+    projectName: 'test',
+  },
 ]
 
 generatePages(openApi)
-generateRoutes(openApi, '/')
+generateRoutes(openApi, '/ivd/')

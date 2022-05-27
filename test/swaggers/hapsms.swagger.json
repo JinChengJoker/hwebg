@@ -1,26 +1,30 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "api/ivd/v1/svc_product.proto",
+    "title": "api/hapsms/v1/hapsms.proto",
     "version": "version not set"
   },
   "tags": [
     {
-      "name": "ProductService"
+      "name": "Hapsms"
     }
   ],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
-    "/v1/ivd/product-categories": {
+    "/v1/hapsms/messages": {
       "get": {
-        "summary": "商品分类列表",
-        "operationId": "ProductService_ListProductCategory",
+        "summary": "Message列表",
+        "operationId": "Hapsms_ListMessage",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1ListProductCategoryReply"
+              "$ref": "#/definitions/v1ListMessageReply"
             }
           },
           "default": {
@@ -32,73 +36,85 @@
         },
         "parameters": [
           {
-            "name": "title",
-            "description": "分类名称关键字",
+            "name": "company_id",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "description",
+            "name": "template_id",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "spec_define",
+            "name": "template_code",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "user_id",
+            "name": "template_vars",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "username",
-            "description": "创建者关键字",
+            "name": "phones",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "updated_uid",
+            "name": "sign_name",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "updated_username",
+            "name": "phone_count",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "result",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "result_error",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "remark",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "page",
-            "description": "分页参数，页码（默认为 1）",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "page_size",
-            "description": "分页参数，单页记录数（默认为 20）",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "sort",
-            "description": "排序参数，指定排序字段（默认为 id）",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "order",
-            "description": "排序参数，指定升、降序，可选值：ASC/DESC（默认为降序）",
             "in": "query",
             "required": false,
             "type": "string"
@@ -153,7 +169,6 @@
           },
           {
             "name": "created_at_gte",
-            "description": "创建时间（起始）",
             "in": "query",
             "required": false,
             "type": "string"
@@ -166,7 +181,6 @@
           },
           {
             "name": "created_at_lte",
-            "description": "创建时间（结束）",
             "in": "query",
             "required": false,
             "type": "string"
@@ -202,16 +216,18 @@
             "type": "string"
           }
         ],
-        "tags": ["ProductService"]
+        "tags": [
+          "Hapsms"
+        ]
       },
       "post": {
-        "summary": "创建商品分类",
-        "operationId": "ProductService_CreateProductCategory",
+        "summary": "创建Message",
+        "operationId": "Hapsms_CreateMessage",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1CreateProductCategoryReply"
+              "$ref": "#/definitions/v1CreateMessageReply"
             }
           },
           "default": {
@@ -227,22 +243,24 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1CreateProductCategoryRequest"
+              "$ref": "#/definitions/v1CreateMessageRequest"
             }
           }
         ],
-        "tags": ["ProductService"]
+        "tags": [
+          "Hapsms"
+        ]
       }
     },
-    "/v1/ivd/product-categories/{id}": {
+    "/v1/hapsms/messages/{id}": {
       "get": {
-        "summary": "商品分类详情",
-        "operationId": "ProductService_GetProductCategory",
+        "summary": "Message详情",
+        "operationId": "Hapsms_GetMessage",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1GetProductCategoryReply"
+              "$ref": "#/definitions/v1GetMessageReply"
             }
           },
           "default": {
@@ -261,100 +279,20 @@
             "format": "int32"
           }
         ],
-        "tags": ["ProductService"]
-      },
-      "delete": {
-        "summary": "删除商品分类",
-        "operationId": "ProductService_DeleteProductCategory",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1DeleteProductCategoryReply"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "tags": ["ProductService"]
-      },
-      "put": {
-        "summary": "编辑商品分类",
-        "operationId": "ProductService_UpdateProductCategory",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/v1UpdateProductCategoryReply"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "type": "string",
-                  "description": "分类名称"
-                },
-                "description": {
-                  "type": "string",
-                  "description": "分类简介"
-                },
-                "params": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/v1ProductSpecParamPb"
-                  },
-                  "description": "规格参数，详情参考创建接口"
-                }
-              },
-              "required": ["title", "description", "params"]
-            }
-          }
-        ],
-        "tags": ["ProductService"]
+        "tags": [
+          "Hapsms"
+        ]
       }
     },
-    "/v1/ivd/products": {
+    "/v1/hapsms/templates": {
       "get": {
-        "summary": "商品信息列表",
-        "operationId": "ProductService_ListProduct",
+        "summary": "Template列表",
+        "operationId": "Hapsms_ListTemplate",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1ListProductReply"
+              "$ref": "#/definitions/v1ListTemplateReply"
             }
           },
           "default": {
@@ -366,100 +304,73 @@
         },
         "parameters": [
           {
-            "name": "category_id",
-            "description": "分类",
+            "name": "company_id",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "title",
-            "description": "名称",
+            "name": "template_code",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "product_code",
-            "description": "商品编号",
+            "name": "biz_type",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "description",
+            "name": "sign_name",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "is_putaway",
-            "description": "是否上架，0下架，1上架",
+            "name": "name",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "price",
+            "name": "content",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "spec_detail",
+            "name": "remark",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "user_id",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "username",
-            "description": "创建者",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "updated_uid",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "updated_username",
+            "name": "template_vars",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "page",
-            "description": "分页参数，页码（默认为 1）",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "page_size",
-            "description": "分页参数，单页记录数（默认为 20）",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "sort",
-            "description": "排序参数，指定排序字段（默认为 id）",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "order",
-            "description": "排序参数，指定升、降序，可选值：ASC/DESC（默认为降序）",
             "in": "query",
             "required": false,
             "type": "string"
@@ -514,7 +425,6 @@
           },
           {
             "name": "created_at_gte",
-            "description": "创建时间（起始）",
             "in": "query",
             "required": false,
             "type": "string"
@@ -527,7 +437,6 @@
           },
           {
             "name": "created_at_lte",
-            "description": "创建时间（结束）",
             "in": "query",
             "required": false,
             "type": "string"
@@ -563,16 +472,18 @@
             "type": "string"
           }
         ],
-        "tags": ["ProductService"]
+        "tags": [
+          "Hapsms"
+        ]
       },
       "post": {
-        "summary": "创建商品信息",
-        "operationId": "ProductService_CreateProduct",
+        "summary": "创建Template",
+        "operationId": "Hapsms_CreateTemplate",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1CreateProductReply"
+              "$ref": "#/definitions/v1CreateTemplateReply"
             }
           },
           "default": {
@@ -588,22 +499,24 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/v1CreateProductRequest"
+              "$ref": "#/definitions/v1CreateTemplateRequest"
             }
           }
         ],
-        "tags": ["ProductService"]
+        "tags": [
+          "Hapsms"
+        ]
       }
     },
-    "/v1/ivd/products/{id}": {
+    "/v1/hapsms/templates/{id}": {
       "get": {
-        "summary": "商品信息详情",
-        "operationId": "ProductService_GetProduct",
+        "summary": "Template详情",
+        "operationId": "Hapsms_GetTemplate",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1GetProductReply"
+              "$ref": "#/definitions/v1GetTemplateReply"
             }
           },
           "default": {
@@ -622,16 +535,18 @@
             "format": "int32"
           }
         ],
-        "tags": ["ProductService"]
+        "tags": [
+          "Hapsms"
+        ]
       },
       "delete": {
-        "summary": "删除商品信息",
-        "operationId": "ProductService_DeleteProduct",
+        "summary": "删除Template",
+        "operationId": "Hapsms_DeleteTemplate",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1DeleteProductReply"
+              "$ref": "#/definitions/v1DeleteTemplateReply"
             }
           },
           "default": {
@@ -650,16 +565,18 @@
             "format": "int32"
           }
         ],
-        "tags": ["ProductService"]
+        "tags": [
+          "Hapsms"
+        ]
       },
       "put": {
-        "summary": "编辑商品信息",
-        "operationId": "ProductService_UpdateProduct",
+        "summary": "编辑Template",
+        "operationId": "Hapsms_UpdateTemplate",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1UpdateProductReply"
+              "$ref": "#/definitions/v1UpdateTemplateReply"
             }
           },
           "default": {
@@ -684,53 +601,38 @@
             "schema": {
               "type": "object",
               "properties": {
-                "category_id": {
+                "company_id": {
                   "type": "integer",
-                  "format": "int32",
-                  "description": "分类"
+                  "format": "int32"
                 },
-                "title": {
-                  "type": "string",
-                  "description": "商品名称"
+                "template_code": {
+                  "type": "string"
                 },
-                "product_code": {
-                  "type": "string",
-                  "description": "商品编号（唯一）"
+                "biz_type": {
+                  "type": "string"
                 },
-                "description": {
-                  "type": "string",
-                  "description": "简介"
+                "sign_name": {
+                  "type": "string"
                 },
-                "is_putaway": {
-                  "type": "integer",
-                  "format": "int32",
-                  "description": "是否上架，0下架，1上架"
+                "name": {
+                  "type": "string"
                 },
-                "price": {
-                  "type": "number",
-                  "format": "double",
-                  "description": "单价，单位：人民币/元"
+                "content": {
+                  "type": "string"
                 },
-                "spec_details": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "description": "商品规格参数 map"
+                "remark": {
+                  "type": "string"
+                },
+                "template_vars": {
+                  "type": "string"
                 }
-              },
-              "required": [
-                "title",
-                "product_code",
-                "description",
-                "is_putaway",
-                "price",
-                "spec_details"
-              ]
+              }
             }
           }
         ],
-        "tags": ["ProductService"]
+        "tags": [
+          "Hapsms"
+        ]
       }
     }
   },
@@ -762,7 +664,7 @@
         }
       }
     },
-    "v1CreateProductCategoryReply": {
+    "v1CreateMessageReply": {
       "type": "object",
       "properties": {
         "id": {
@@ -771,28 +673,24 @@
         }
       }
     },
-    "v1CreateProductCategoryRequest": {
+    "v1CreateMessageRequest": {
       "type": "object",
       "properties": {
-        "title": {
-          "type": "string",
-          "description": "分类名称"
+        "template_code": {
+          "type": "string"
         },
-        "description": {
-          "type": "string",
-          "description": "分类描述"
+        "template_vars": {
+          "type": "string"
         },
-        "params": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v1ProductSpecParamPb"
-          },
-          "description": "规格参数，用于商品构建"
+        "phones": {
+          "type": "string"
+        },
+        "sign_name": {
+          "type": "string"
         }
-      },
-      "required": ["title", "description", "params"]
+      }
     },
-    "v1CreateProductReply": {
+    "v1CreateTemplateReply": {
       "type": "object",
       "properties": {
         "id": {
@@ -801,284 +699,203 @@
         }
       }
     },
-    "v1CreateProductRequest": {
+    "v1CreateTemplateRequest": {
       "type": "object",
       "properties": {
-        "category_id": {
-          "type": "integer",
-          "format": "int32",
-          "description": "分类，商品创建时，选择分类后才可配置规格参数"
-        },
-        "title": {
-          "type": "string",
-          "description": "商品名称"
-        },
-        "product_code": {
-          "type": "string",
-          "description": "商品编号"
-        },
-        "description": {
-          "type": "string",
-          "description": "商品简介"
-        },
-        "is_putaway": {
-          "type": "integer",
-          "format": "int32",
-          "description": "是否上架"
-        },
-        "price": {
-          "type": "number",
-          "format": "double",
-          "description": "商品单价，单位：元"
-        },
-        "spec_details": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "商品规格 map，根据分类的规格参数配置，键为规格参数名称，值为参数值。例：样本类型: 唾液"
-        }
-      },
-      "required": [
-        "category_id",
-        "title",
-        "product_code",
-        "description",
-        "is_putaway",
-        "price",
-        "spec_details"
-      ]
-    },
-    "v1DeleteProductCategoryReply": {
-      "type": "object"
-    },
-    "v1DeleteProductReply": {
-      "type": "object"
-    },
-    "v1GetProductCategoryReply": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "$ref": "#/definitions/v1ProductCategoryPb"
-        }
-      }
-    },
-    "v1GetProductReply": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "$ref": "#/definitions/v1ProductPb"
-        }
-      }
-    },
-    "v1ListProductCategoryReply": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v1ProductCategoryPb"
-          }
-        },
-        "total": {
-          "type": "integer",
-          "format": "int32"
-        }
-      }
-    },
-    "v1ListProductReply": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v1ProductPb"
-          }
-        },
-        "total": {
-          "type": "integer",
-          "format": "int32"
-        }
-      }
-    },
-    "v1ProductCategoryPb": {
-      "type": "object",
-      "properties": {
-        "id": {
+        "company_id": {
           "type": "integer",
           "format": "int32"
         },
-        "title": {
-          "type": "string",
-          "description": "分类名称"
+        "template_code": {
+          "type": "string"
         },
-        "description": {
-          "type": "string",
-          "description": "简介"
+        "biz_type": {
+          "type": "string"
         },
-        "user_id": {
-          "type": "integer",
-          "format": "int32",
-          "title": "string spec_define = 4;"
+        "sign_name": {
+          "type": "string"
         },
-        "username": {
-          "type": "string",
-          "description": "创建者"
-        },
-        "updated_uid": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "updated_username": {
-          "type": "string",
-          "description": "更新者"
-        },
-        "created_at": {
-          "type": "string",
-          "description": "创建时间"
-        },
-        "updated_at": {
-          "type": "string",
-          "description": "最后更新时间"
-        },
-        "params": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/v1ProductSpecParamPb"
-          },
-          "description": "分类规格"
-        }
-      },
-      "required": [
-        "id",
-        "title",
-        "description",
-        "user_id",
-        "username",
-        "updated_uid",
-        "updated_username",
-        "created_at",
-        "updated_at",
-        "params"
-      ]
-    },
-    "v1ProductPb": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "category_id": {
-          "type": "integer",
-          "format": "int32",
-          "description": "分类"
-        },
-        "title": {
-          "type": "string",
-          "description": "商品名称"
-        },
-        "product_code": {
-          "type": "string",
-          "description": "商品编号"
-        },
-        "description": {
-          "type": "string",
-          "description": "简介"
-        },
-        "is_putaway": {
-          "type": "integer",
-          "format": "int32",
-          "description": "是否上架，0下架，1上架"
-        },
-        "price": {
-          "type": "number",
-          "format": "double",
-          "description": "单价，单位：人民币/元"
-        },
-        "user_id": {
-          "type": "integer",
-          "format": "int32",
-          "title": "string spec_detail = 8;"
-        },
-        "username": {
-          "type": "string",
-          "description": "创建者"
-        },
-        "updated_uid": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "updated_username": {
-          "type": "string",
-          "description": "更新者"
-        },
-        "created_at": {
-          "type": "string",
-          "description": "创建时间"
-        },
-        "updated_at": {
-          "type": "string",
-          "description": "最后更新时间"
-        },
-        "category": {
-          "$ref": "#/definitions/v1ProductCategoryPb",
-          "description": "关联分类"
-        },
-        "spec_details": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "商品规格参数 map"
-        }
-      },
-      "required": [
-        "id",
-        "title",
-        "product_code",
-        "description",
-        "is_putaway",
-        "price",
-        "user_id",
-        "username",
-        "updated_uid",
-        "updated_username",
-        "created_at",
-        "updated_at",
-        "category",
-        "spec_details"
-      ]
-    },
-    "v1ProductSpecParamPb": {
-      "type": "object",
-      "properties": {
         "name": {
-          "type": "string",
-          "description": "规格名称，例：样本类型"
+          "type": "string"
         },
-        "is_numeric": {
-          "type": "boolean",
-          "description": "是否为数字，指定商品规格值是否仅允许填写数字"
+        "content": {
+          "type": "string"
         },
-        "unit": {
-          "type": "string",
-          "description": "单位（可空），例：kg"
+        "remark": {
+          "type": "string"
         },
-        "options": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "规格选项: 指定商品规格的可选值，例：唾液,血液"
+        "template_vars": {
+          "type": "string"
         }
-      },
-      "required": ["name", "is_numeric", "unit", "options"]
+      }
     },
-    "v1UpdateProductCategoryReply": {
+    "v1DeleteTemplateReply": {
       "type": "object"
     },
-    "v1UpdateProductReply": {
+    "v1GetMessageReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/v1MessagePb"
+        }
+      }
+    },
+    "v1GetTemplateReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/v1TemplatePb"
+        }
+      }
+    },
+    "v1ListMessageReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1MessagePb"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1ListTemplateReply": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1TemplatePb"
+          }
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1MessagePb": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "company_id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "template_id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "template_code": {
+          "type": "string"
+        },
+        "template_vars": {
+          "type": "string"
+        },
+        "phones": {
+          "type": "string"
+        },
+        "sign_name": {
+          "type": "string"
+        },
+        "phone_count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "result_error": {
+          "type": "string"
+        },
+        "remark": {
+          "type": "string"
+        },
+        "creator_uid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "creator": {
+          "type": "string"
+        },
+        "updater_uid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "updater": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        }
+      }
+    },
+    "v1TemplatePb": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "company_id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "template_code": {
+          "type": "string"
+        },
+        "biz_type": {
+          "type": "string"
+        },
+        "sign_name": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "remark": {
+          "type": "string"
+        },
+        "template_vars": {
+          "type": "string"
+        },
+        "creator_uid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "creator": {
+          "type": "string"
+        },
+        "updater_uid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "updater": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        }
+      }
+    },
+    "v1UpdateTemplateReply": {
       "type": "object"
     }
   }
