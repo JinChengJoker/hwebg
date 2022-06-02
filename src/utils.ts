@@ -79,7 +79,7 @@ export const parseOpenApi = (openApi: OpenAPIObject) => {
       const postRequestBodyTypeName = (pathItem.post.requestBody as RequestBodyObject)?.content['application/json'].schema?.$ref.replace('#/components/schemas/', '')
       // 表的所有列
       const columns = convertPropertiesToColumns(schemas[pbTypeName].properties)
-      const tag = pathItem["x-swagger-router-controller"] || pathItem.get.tags?.[0]
+      const tag = pathItem.get.tags?.[0] || pathItem["x-swagger-router-controller"]
       // 寻找 put 和 delete 方法
       if (!methods.put || !methods.delete) {
         for (let i = 0; i < pathsArray.length; i++) {

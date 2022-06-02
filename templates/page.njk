@@ -67,7 +67,9 @@ const handleDel = async (fields: {{pbTypeName}}) => {
 
 const TableList: React.FC = () => {
   const [createModalVisible, setCreateModalVisible] = useState<boolean>(false);
+  {%- if methods.put %}
   const [updateModalVisible, setUpdateModalVisible] = useState<boolean>(false);
+  {%- endif -%}
   const [detailVisible, setDetailVisible] = useState<boolean>(false);
   const actionRef = useRef<ActionType>();
   const [currentRow, setCurrentRow] = useState<{{pbTypeName}}>();
