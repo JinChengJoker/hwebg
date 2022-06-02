@@ -4,7 +4,6 @@ import * as prettier from 'prettier';
 import type { TableProperties, Table, Methods } from './index.d'
 import type { OpenAPIObject, PathItemObject, RequestBodyObject, SchemaObject } from 'openapi3-ts'
 
-const { prettier: defaultPrettierOptions } = require('@umijs/fabric');
 const converter = require('swagger2openapi')
 
 // 格式化文件
@@ -17,7 +16,6 @@ export const prettierFile = (content: string): [string, boolean] => {
       trailingComma: 'all',
       printWidth: 100,
       parser: 'typescript',
-      ...defaultPrettierOptions,
     });
   } catch (error) {
     hasError = true;
