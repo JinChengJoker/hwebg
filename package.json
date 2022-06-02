@@ -1,6 +1,6 @@
 {
   "name": "hwebg",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Generate CURD pages and routes config by openAPI",
   "repository": {
     "type": "git",
